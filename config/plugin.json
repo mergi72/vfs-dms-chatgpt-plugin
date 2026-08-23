@@ -1,0 +1,20 @@
+{
+  "plugin": {
+    "id": "vfs-dms-chatgpt-plugin",
+    "name": "VFS DMS",
+    "mode": "read-only"
+  },
+  "mcp": {
+    "server": "vfs-dms",
+    "url": "http://127.0.0.1:8781/mcp",
+    "requiredTools": [
+      "bridge_health",
+      "list_connections",
+      "list_items",
+      "search_items",
+      "open_share_url",
+      "get_item_info",
+      "read_document"
+    ]
+  }
+}

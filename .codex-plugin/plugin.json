@@ -1,0 +1,26 @@
+{
+  "name": "vfs-dms-chatgpt-plugin",
+  "version": "0.1.0",
+  "description": "Read-only VFS DMS access for ChatGPT and Codex through the shared VFS MCP Server.",
+  "author": {
+    "name": "VFS Platform"
+  },
+  "repository": "https://github.com/mergi72/vfs-dms-chatgpt-plugin",
+  "license": "MIT",
+  "keywords": ["vfs", "dms", "mcp", "chatgpt", "alfresco", "edocat", "webdav"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "VFS DMS",
+    "shortDescription": "Read company DMS repositories through VFS MCP.",
+    "longDescription": "Connect ChatGPT or Codex to the read-only VFS DMS tools already used by Demi. The plugin talks only to VFS MCP Server; credentials and DMS providers remain behind Provider Bridge.",
+    "developerName": "VFS Platform",
+    "category": "Productivity",
+    "capabilities": ["Read"],
+    "defaultPrompt": [
+      "Vypiš dostupná DMS připojení.",
+      "Najdi dokument v DMS.",
+      "Otevři sdílený odkaz z eDoCatu."
+    ]
+  }
+}

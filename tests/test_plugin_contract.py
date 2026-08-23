@@ -18,10 +18,11 @@ def load_json(relative_path: str) -> dict:
     return json.loads((ROOT / relative_path).read_text(encoding="utf-8"))
 
 
-def test_manifest_and_folder_names_match() -> None:
+def test_manifest_identity_matches_plugin_config() -> None:
     manifest = load_json(".codex-plugin/plugin.json")
-    assert manifest["name"] == ROOT.name
-    assert manifest["version"] == "0.1.0"
+    settings = load_json("config/plugin.json")
+    assert manifest["name"] == settings["plugin"]["id"] == "vfs-dms-chatgpt-plugin"
+    assert manifest["version"] == "0.1.1"
     assert manifest["mcpServers"] == "./.mcp.json"
 
 

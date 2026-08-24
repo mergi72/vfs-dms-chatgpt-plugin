@@ -16,5 +16,12 @@
       "get_item_info",
       "read_document"
     ]
+  },
+  "debug": {
+    "enable": true,
+    "path": "%USERPROFILE%\\.local\\state\\tunnel-client\\logs",
+    "files": [
+      "vfs-dms-local.log"
+    ]
   }
 }

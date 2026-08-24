@@ -22,7 +22,7 @@ def test_manifest_identity_matches_plugin_config() -> None:
     manifest = load_json(".codex-plugin/plugin.json")
     settings = load_json("config/plugin.json")
     assert manifest["name"] == settings["plugin"]["id"] == "vfs-dms-chatgpt-plugin"
-    assert manifest["version"] == "0.1.1"
+    assert manifest["version"] == "0.1.2"
     assert manifest["mcpServers"] == "./.mcp.json"
 
 
@@ -36,6 +36,16 @@ def test_required_tool_scope_matches_demi() -> None:
     settings = load_json("config/plugin.json")
     assert settings["plugin"]["mode"] == "read-only"
     assert set(settings["mcp"]["requiredTools"]) == EXPECTED_TOOLS
+
+
+def test_debug_log_is_declared_without_secrets() -> None:
+    settings = load_json("config/plugin.json")
+    assert settings["debug"] == {
+        "enable": True,
+        "path": "%USERPROFILE%\\.local\\state\\tunnel-client\\logs",
+        "files": ["vfs-dms-local.log"],
+    }
+    assert "token" not in json.dumps(settings["debug"]).lower()
 
 
 def test_skill_requires_explicit_document_read_request() -> None:

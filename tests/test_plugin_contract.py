@@ -23,7 +23,7 @@ def test_manifest_identity_matches_plugin_config() -> None:
     manifest = load_json(".codex-plugin/plugin.json")
     settings = load_json("config/plugin.json")
     assert manifest["name"] == settings["plugin"]["id"] == "vfs-dms-chatgpt-plugin"
-    assert manifest["version"] == "0.1.2"
+    assert manifest["version"] == "0.2.0"
     assert manifest["mcpServers"] == "./.mcp.json"
 
 

@@ -6,12 +6,13 @@
   },
   "mcp": {
     "server": "vfs-dms",
-    "url": "http://127.0.0.1:8781/mcp",
+    "url": "http://127.0.0.1:8782/mcp",
     "requiredTools": [
       "bridge_health",
       "list_connections",
       "list_items",
       "search_items",
+      "search_metadata",
       "open_share_url",
       "get_item_info",
       "read_document"

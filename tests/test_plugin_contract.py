@@ -8,6 +8,7 @@ EXPECTED_TOOLS = {
     "list_connections",
     "list_items",
     "search_items",
+    "search_metadata",
     "open_share_url",
     "get_item_info",
     "read_document",
@@ -28,7 +29,7 @@ def test_manifest_identity_matches_plugin_config() -> None:
 
 def test_plugin_uses_http_mcp_service() -> None:
     server = load_json(".mcp.json")["mcpServers"]["vfs-dms"]
-    assert server == {"type": "http", "url": "http://127.0.0.1:8781/mcp"}
+    assert server == {"type": "http", "url": "http://127.0.0.1:8782/mcp"}
     assert ".venv" not in json.dumps(server)
 
 
@@ -52,3 +53,11 @@ def test_skill_requires_explicit_document_read_request() -> None:
     skill = (ROOT / "skills" / "vfs-dms" / "SKILL.md").read_text(encoding="utf-8")
     assert "only when the user explicitly asks" in skill
     assert "Never contact Provider Bridge" in skill
+
+
+def test_skill_defines_deterministic_tag_search_orchestration() -> None:
+    skill = (ROOT / "skills" / "vfs-dms" / "SKILL.md").read_text(encoding="utf-8")
+    assert 'search_metadata(path="alfresco:/", field="TAG", value="<tag>")' in skill
+    assert "copy its returned public VFS path verbatim" in skill
+    assert "do not repeat the same search in the same turn" in skill
+    assert "truncated=true" in skill

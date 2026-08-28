@@ -25,6 +25,13 @@ Use only the `vfs-dms` MCP server. Never contact Provider Bridge, Credential Bro
 - Avoid exhaustive recursive browsing. Stop when the requested item is found or when further traversal would be disproportionately expensive, and report the searched scope.
 - Use `get_item_info` for metadata and `open_share_url` for a supplied DMS share URL.
 
+### Tag lookup
+
+- For a known DMS tag, call `search_metadata(path="alfresco:/", field="TAG", value="<tag>")`. Do not probe eDoCat, alternate field names, or field aliases first.
+- When `search_metadata` returns exactly one valid folder, copy its returned public VFS path verbatim into the following operation. Do not shorten, normalize, reconstruct, or verify that path by browsing.
+- After a successful `search_items` call, do not repeat the same search in the same turn. A result with `complete=true` and `warnings=[]` is final even when `truncated=true` only because `max_results` limited the returned items.
+- Retry an identical search only after an error or when the result explicitly reports incomplete traversal for a reason other than the requested result limit.
+
 ## Document content
 
 - Call `read_document` only when the user explicitly asks to read, summarize, inspect, or answer from the document content.

@@ -8,6 +8,7 @@ EXPECTED_TOOLS = {
     "list_connections",
     "list_items",
     "search_items",
+    "search_metadata",
     "open_share_url",
     "get_item_info",
     "read_document",
@@ -22,7 +23,7 @@ def test_manifest_identity_matches_plugin_config() -> None:
     manifest = load_json(".codex-plugin/plugin.json")
     settings = load_json("config/plugin.json")
     assert manifest["name"] == settings["plugin"]["id"] == "vfs-dms-chatgpt-plugin"
-    assert manifest["version"] == "0.1.2"
+    assert manifest["version"] == "0.2.0"
     assert manifest["mcpServers"] == "./.mcp.json"
 
 
@@ -52,3 +53,11 @@ def test_skill_requires_explicit_document_read_request() -> None:
     skill = (ROOT / "skills" / "vfs-dms" / "SKILL.md").read_text(encoding="utf-8")
     assert "only when the user explicitly asks" in skill
     assert "Never contact Provider Bridge" in skill
+
+
+def test_skill_defines_deterministic_tag_search_orchestration() -> None:
+    skill = (ROOT / "skills" / "vfs-dms" / "SKILL.md").read_text(encoding="utf-8")
+    assert 'search_metadata(path="alfresco:/", field="TAG", value="<tag>")' in skill
+    assert "copy its returned public VFS path verbatim" in skill
+    assert "do not repeat the same search in the same turn" in skill
+    assert "truncated=true" in skill

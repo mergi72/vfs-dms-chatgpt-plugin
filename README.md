@@ -38,7 +38,9 @@ All operations are read-only. Document content is read only after an explicit us
 
 The installable plugin endpoint is declared in `.mcp.json`. `config/plugin.json` documents the VFS component contract and the required tool allowlist. There are no credentials in this repository.
 
-The default endpoint is `http://127.0.0.1:8781/mcp`.
+The canonical VFS MCP endpoint is `http://127.0.0.1:8781/mcp`. The MCP server
+runtime may use SDK v2 internally, but clients and plugins keep the stable
+endpoint and the same read-only tool contract.
 
 This local endpoint works only for an OpenAI client that can reach the local machine. A hosted ChatGPT connection will require a securely published MCP endpoint with authentication and TLS; do not expose the current unauthenticated local MCP service directly to the internet.
 

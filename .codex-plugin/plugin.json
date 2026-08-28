@@ -1,6 +1,6 @@
 {
   "name": "vfs-dms-chatgpt-plugin",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Read-only VFS DMS access for ChatGPT and Codex through the shared VFS MCP Server.",
   "author": {
     "name": "VFS Platform"

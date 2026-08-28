@@ -6,7 +6,7 @@
   },
   "mcp": {
     "server": "vfs-dms",
-    "url": "http://127.0.0.1:8782/mcp",
+    "url": "http://127.0.0.1:8781/mcp",
     "requiredTools": [
       "bridge_health",
       "list_connections",

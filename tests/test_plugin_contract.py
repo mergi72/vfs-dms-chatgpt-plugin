@@ -29,7 +29,7 @@ def test_manifest_identity_matches_plugin_config() -> None:
 
 def test_plugin_uses_http_mcp_service() -> None:
     server = load_json(".mcp.json")["mcpServers"]["vfs-dms"]
-    assert server == {"type": "http", "url": "http://127.0.0.1:8782/mcp"}
+    assert server == {"type": "http", "url": "http://127.0.0.1:8781/mcp"}
     assert ".venv" not in json.dumps(server)
 
 

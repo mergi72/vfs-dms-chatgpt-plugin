@@ -21,7 +21,7 @@ Use only the `vfs-dms` MCP server. Never contact Provider Bridge, Credential Bro
 - Start with `list_connections` when the connection is unknown.
 - Interpret requests such as "otevři Alfresco" or "připoj se do eDoCatu" as opening the connection root with `list_items`, not as opening a file.
 - Users may give abbreviated paths. Resolve them incrementally with `list_items` and `search_items`; do not require an exact path they could have clicked manually.
-- Prefer `search_items` for locating a name or phrase. Use `list_items` to navigate known folders or verify ambiguous search results.
+- Prefer `search_items(search_mode="first_matches")` for locating a name or phrase. Use `search_mode="exhaustive"` only when the user explicitly needs an exact total or complete globally ordered result. Use `list_items` to navigate known folders or verify ambiguous search results.
 - Avoid exhaustive recursive browsing. Stop when the requested item is found or when further traversal would be disproportionately expensive, and report the searched scope.
 - Use `get_item_info` for metadata and `open_share_url` for a supplied DMS share URL.
 
@@ -29,7 +29,7 @@ Use only the `vfs-dms` MCP server. Never contact Provider Bridge, Credential Bro
 
 - For a known DMS tag, call `search_metadata(path="alfresco:/", field="TAG", value="<tag>")`. Do not probe eDoCat, alternate field names, or field aliases first.
 - When `search_metadata` returns exactly one valid folder, copy its returned public VFS path verbatim into the following operation. Do not shorten, normalize, reconstruct, or verify that path by browsing.
-- After a successful `search_items` call, do not repeat the same search in the same turn. A result with `complete=true` and `warnings=[]` is final even when `truncated=true` only because `max_results` limited the returned items.
+- After a successful `search_items` call, do not repeat the same search in the same turn. In `first_matches` mode, `reason="result_limit"` is a successful final result with an intentionally unknown total. In `exhaustive` mode, `complete=true` and `warnings=[]` is final.
 - Retry an identical search only after an error or when the result explicitly reports incomplete traversal for a reason other than the requested result limit.
 
 ## Document content

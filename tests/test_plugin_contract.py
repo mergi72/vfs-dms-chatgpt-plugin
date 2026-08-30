@@ -23,7 +23,7 @@ def test_manifest_identity_matches_plugin_config() -> None:
     manifest = load_json(".codex-plugin/plugin.json")
     settings = load_json("config/plugin.json")
     assert manifest["name"] == settings["plugin"]["id"] == "vfs-dms-chatgpt-plugin"
-    assert manifest["version"] == "0.2.0"
+    assert manifest["version"] == "0.2.1"
     assert manifest["mcpServers"] == "./.mcp.json"
 
 
@@ -60,4 +60,7 @@ def test_skill_defines_deterministic_tag_search_orchestration() -> None:
     assert 'search_metadata(path="alfresco:/", field="TAG", value="<tag>")' in skill
     assert "copy its returned public VFS path verbatim" in skill
     assert "do not repeat the same search in the same turn" in skill
-    assert "truncated=true" in skill
+    assert 'reason="result_limit"' in skill
+    assert "successful final result" in skill
+    assert "intentionally unknown total" in skill
+    assert "complete=true" in skill
